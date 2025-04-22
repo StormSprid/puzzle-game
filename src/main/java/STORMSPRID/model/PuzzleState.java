@@ -19,6 +19,11 @@ public class PuzzleState {
         };
     }
 
+    public PuzzleState(Position... positions){
+        checkPosition(positions);
+        this.positions=positions.clone();
+    }
+
     private boolean isOnBoard(Position position){
         return position.getRow()>=0
                 && position.getRow() < BOARD_SIZE
@@ -40,5 +45,21 @@ public class PuzzleState {
         }
 
 
+    }
+
+    public Position getPosition(int index){
+        return positions[index];
+    }
+    private boolean samePosition(int position1,int position2){
+       return Objects.equals(
+                positions[position1],positions[position2]
+        );
+    }
+
+    public boolean isGoal(){
+//        return Objects.equals(
+//                positions[BLUE_SHOE],positions[BLUE_SHOE]
+//        );
+        return samePosition(BLUE_SHOE,RED_SHOE);
     }
 }
