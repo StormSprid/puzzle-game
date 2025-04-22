@@ -43,4 +43,17 @@ public class Position {
                 col + direction.getColChange()
         );
     }
+    public Position moveUp() {
+        return move(Direction.UP);
+    }
+    public Position moveLeft(){
+        return move(Direction.LEFT);
+    }
+
+    public Position moveDown(){
+        return move(Direction.DOWN);
+    }
+    public Position moveRight(){
+        return move(Direction.RIGHT);
+    }
 }
