@@ -98,4 +98,25 @@ public class PuzzleState {
         }
         return true;
     }
+
+    private boolean canMoveDown(){
+        if (getPosition(BLOCK).getRow()==BOARD_SIZE-1){
+            return false;
+        }
+        Position down = getPosition(BLOCK).moveDown();
+        if (isEmpty(down)){
+            return true;
+        }
+        if (samePosition(BLACK_SHOE,BLOCK)){
+            return false;//together with black,we cannot move
+        }
+        if (Objects.equals(down,getPosition(BLUE_SHOE))){
+            return true;//to blue shoe,it is ok
+        }
+        if(Objects.equals(down,RED_SHOE)
+                &&samePosition(BLACK_SHOE,BLOCK)){
+            return false;
+        }
+        return true;
+    }
 }
