@@ -1,5 +1,6 @@
 package STORMSPRID.model;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class PuzzleState {
@@ -56,10 +57,45 @@ public class PuzzleState {
         );
     }
 
+
     public boolean isGoal(){
 //        return Objects.equals(
 //                positions[BLUE_SHOE],positions[BLUE_SHOE]
 //        );
         return samePosition(BLUE_SHOE,RED_SHOE);
+    }
+    private boolean isEmpty(Position position){
+//        for(Position p:positions){
+//            if (Objects.equals(p,position)){
+//                return false;
+//            }
+//        }
+//        return true;
+        return Arrays.stream(positions)
+                .noneMatch(position::equals);
+    }
+    private boolean canMoveUp(){
+        return getPosition(BLOCK).getRow()>0
+                && isEmpty(getPosition(BLOCK).moveUp());
+    }
+    private boolean canMoveLeft(){
+        return getPosition(BLOCK).getCol() >0
+                && isEmpty(getPosition(BLOCK).moveLeft());
+    }
+    private boolean canMoveRight(){
+        if (getPosition(BLOCK).getCol()==BOARD_SIZE-1){
+            return false;
+        }
+        Position right = getPosition(BLOCK).moveRight();
+        if (isEmpty(right)){
+            return true;
+        }
+        if (Objects.equals(right,getPosition(BLUE_SHOE))){
+            return false;
+        }
+        if (Objects.equals(right,getPosition(RED_SHOE))){
+            return false;
+        }
+        return true;
     }
 }
