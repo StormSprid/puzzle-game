@@ -23,4 +23,12 @@ public enum Direction {
         }
         throw new IllegalArgumentException();
     }
+
+    public int getRowChange() {
+        return rowChange;
+    }
+
+    public int getColChange() {
+        return colChange;
+    }
 }
